@@ -21,11 +21,18 @@ def load_api_client() -> OpenAI:
 def build_prompt(row: pd.Series) -> str:
     """
     Build a prompt for a single job row.
-    Expects columns: company, role_title, job_text.
+    Expects columns: company, role_title, job_text, job_description (optional).
     """
-    company = row.get("company", "")
-    role_title = row.get("role_title", "")
-    job_text = row.get("job_text", "")
+    company = row.get("company", "") or ""
+    role_title = row.get("role_title", "") or ""
+    job_text = row.get("job_text", "") or ""
+    job_description = row.get("job_description", "") or ""
+
+    # Combine description + email snippet
+    combined_text = (job_description + "\n\n" + job_text).strip()
+
+    if not combined_text:
+        combined_text = "(No job description text provided. Infer as best you can from the title and company.)"
 
     return f"""
 You are helping a student track their job applications.
@@ -33,9 +40,9 @@ You are helping a student track their job applications.
 Job title: {role_title}
 Company: {company}
 
-Here is some text related to the job (from the description, notes, or email):
+Here is some text related to the job (description, notes, or emails):
 ---
-{job_text}
+{combined_text}
 ---
 
 Your tasks:
@@ -83,18 +90,16 @@ def process_jobs(input_path: Path, output_path: Path) -> None:
     df = pd.read_csv(input_path)
 
     # Ensure these columns exist
-    if "summary" not in df.columns:
-        df["summary"] = ""
-    if "skills" not in df.columns:
-        df["skills"] = ""
-    if "salary" not in df.columns:
-        df["salary"] = ""
+    for col in ["summary", "skills", "salary", "job_description"]:
+        if col not in df.columns:
+            df[col] = ""
 
     updated = 0
 
     for idx, row in df.iterrows():
-        # Skip rows that already have a summary
-        if isinstance(row.get("summary", ""), str) and row["summary"].strip():
+        # Only summarize rows where summary is empty / whitespace
+        existing_summary = str(row.get("summary", "") or "").strip()
+        if existing_summary:
             continue
 
         print(f"Summarizing: {row.get('company', '')} - {row.get('role_title', '')} ...")
