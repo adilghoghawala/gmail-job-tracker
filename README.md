@@ -40,24 +40,35 @@ This is meant to replace “trying to remember where I applied” with a single,
   - py job_tracker.py --input jobs.csv --output jobs_with_summaries.csv
 
 ---
-## Setup
+## ⚙️ Setup
 
-- **OpenAI API key**
-  - Create an API key on the OpenAI platform.
-  - Copy .env.example to .env and set:
-    - OPENAI_API_KEY=sk-...your-key-here...
-  - Make sure .env is in .gitignore.
+### 🔑 OpenAI API key
 
-- **Gmail API credentials**
-    - Create a project in Google Cloud Console.
-    - Enable the Gmail API.
-    - Configure OAuth consent screen:
-        - User type: External
-        - Status: Testing
-        - Add your Gmail as a Test user 
-    - Create an OAuth Client of type Desktop App
-    - Download the JSON and save it as:
-        - gmail-job-tracker/credentials.json
+- Create an API key on the **OpenAI** platform.
+- Copy `.env.example` to `.env` and set:
+
+  ```text
+  OPENAI_API_KEY=sk-...your-key-here...
+
+
+### 📧 Gmail API credentials
+
+In **Google Cloud Console**:
+
+- Create a new project (e.g. `gmail-job-tracker`).
+- Enable the **Gmail API**.
+- Configure the **OAuth consent screen**:
+  - User type: **External**
+  - Status: **Testing**
+  - Add your Gmail address as a **Test user**
+- Create an **OAuth client**:
+  - Application type: **Desktop app**
+  - Download the JSON and save it as:
+
+    ```text
+    gmail-job-tracker/credentials.json
+    ```
+
 
 
 ## Project structure
