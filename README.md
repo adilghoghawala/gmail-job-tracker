@@ -52,7 +52,9 @@ This is meant to replace “trying to remember where I applied” with a single,
     - Create a project in Google Cloud Console.
     - Enable the Gmail API.
     - Configure OAuth consent screen:
-    - Add your Gmail as a Test user 
+        - User type: External
+        - Status: Testing
+        - Add your Gmail as a Test user 
     - Create an OAuth Client of type Desktop App
     - Download the JSON and save it as:
         - gmail-job-tracker/credentials.json
