@@ -2,3 +2,7 @@
 .env
 credentials.json
 token.json
+jobs.csv
+jobs_with_summaries.csv
+jobs.csv
+jobs.csv
