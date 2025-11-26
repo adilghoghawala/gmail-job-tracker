@@ -49,7 +49,7 @@ This is meant to replace “trying to remember where I applied” with a single,
 
   ```text
   OPENAI_API_KEY=sk-...your-key-here...
-
+  ```
 
 ### 📧 Gmail API credentials
 
