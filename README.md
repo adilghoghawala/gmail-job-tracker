@@ -49,13 +49,13 @@ This is meant to replace “trying to remember where I applied” with a single,
   - Make sure .env is in .gitignore.
 
 - **Gmail API credentials**
-- Create a project in Google Cloud Console.
-- Enable the Gmail API.
-- Configure OAuth consent screen:
-- Add your Gmail as a Test user 
-- Create an OAuth Client of type Desktop App
-- Download the JSON and save it as:
-    - gmail-job-tracker/credentials.json
+    - Create a project in Google Cloud Console.
+    - Enable the Gmail API.
+    - Configure OAuth consent screen:
+    - Add your Gmail as a Test user 
+    - Create an OAuth Client of type Desktop App
+    - Download the JSON and save it as:
+        - gmail-job-tracker/credentials.json
 
 
 ## Project structure
